@@ -16,7 +16,7 @@ class ZeroMQHandler():
 
     def post(self, data, type=None):
         data = {"type": type, "content" : data}
-        if config.application_key:
+        if config.secret_key:
             data['secret_key'] = config.secret_key
         
         self.socket.send_json(data, zmq.NOBLOCK)
