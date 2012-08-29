@@ -6,7 +6,10 @@ class ZeroMQHandler():
         self.ctx = zmq.Context.instance()
         self.socket = zmq.Socket(self.ctx, socktype)
         self.socket.setsockopt(zmq.LINGER, 100)
-        self.socket.setsockopt(zmq.SWAP, 25000000) # 25MB disk swap
+        # As there is no high water mark set - we don't really need this
+        # Additionally, its not possible to set location of these yet
+        # https://zeromq.jira.com/browse/LIBZMQ-410
+        #self.socket.setsockopt(zmq.SWAP, 25000000) # 25MB disk swap
         
         address = "tcp://{0}".format(config.address)
         self.socket.connect(address)
